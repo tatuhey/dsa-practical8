@@ -1,5 +1,4 @@
 public class DSAHeapEntry {
-    
     private int m_priority;
     private Object m_value;
 
