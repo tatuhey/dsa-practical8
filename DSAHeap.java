@@ -44,6 +44,10 @@ public class DSAHeap{
             System.out.println(heap[i].toString());
     }
 
+    public String displayTop(){
+        return heap[0].toString();
+    }
+
     private int parent(int idx) {
         return (idx - 1) / 2;
     }
@@ -106,7 +110,7 @@ public class DSAHeap{
 
     public void heapSort(int count) {
         heapify(count);
-        for(int i = count-1; i >= 0; i--){
+        for(int i = count - 1; i >= 0; i--){
             swap(heap, 0, i);
             trickleDown(0, i);
         }
