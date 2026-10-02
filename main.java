@@ -57,7 +57,7 @@ public class main {
         DSAHeap heapArr = new DSAHeap(size);
         readFile(filename, heapArr);
 
-        submenu(sc, heapArr);
+        submenu(sc, heapArr, filename);
     }
 
     public static void autoSelection2(Scanner sc) {
@@ -65,19 +65,20 @@ public class main {
 
         readFile("RandomNames7000.csv", heapArr);
 
-        submenu(sc, heapArr);
+        submenu(sc, heapArr, "RandomNames7000.csv");
     }
 
 
-    public static void submenu(Scanner sc, DSAHeap arr) {
+    public static void submenu(Scanner sc, DSAHeap arr, String filname) {
         int sel = 100000;
         int prio;
         Object val;
         int count;
 
         while(sel != 0) {
+            System.out.println("Current file being worked on: " + filname);
             System.out.println("Select menu:");
-            System.out.println("1. Add to heap\n2. Remove from heap\n3. Heap Sort\n4. Display\n0. exit");
+            System.out.println("1. Add to heap\n2. Remove from heap\n3. Heap Sort\n4. Display\n5. Export\n0. exit");
             
             try {
                 sel = sc.nextInt();
