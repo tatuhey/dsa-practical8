@@ -1,3 +1,5 @@
+import java.io.*;
+
 public class DSAHeap{
     private int count;
     private int capacity;
@@ -115,4 +117,18 @@ public class DSAHeap{
             trickleDown(0, i);
         }
     }
+
+    public void export(String fileName) {
+        try {
+            FileWriter writer = new FileWriter(fileName);
+            for(int i = 0; i < heap.length; i++) {
+                    writer.write(heap[i].getPriority() + "," + heap[i].getValue() + "\n");
+            }
+            System.out.println("File " + fileName + " has been created");
+            writer.close();
+        } catch(IOException e) {
+            System.out.println("Error during exporting the file. " + e.getMessage());
+        }
+    }
+    
 }

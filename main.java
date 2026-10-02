@@ -41,7 +41,23 @@ public class main {
     }
 
     public static void manualSelection(Scanner sc) {
+        int size = 0;
+        String filename;
 
+        try {
+            System.out.print("Insert size of heap: ");
+            size = sc.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println(e + ". Please input size of heap properly.");
+        }
+
+        System.out.println("Insert the file name: <filename.csv>");
+        filename = sc.nextLine();
+
+        DSAHeap heapArr = new DSAHeap(size);
+        readFile(filename, heapArr);
+
+        submenu(sc, heapArr);
     }
 
     public static void autoSelection2(Scanner sc) {
@@ -75,11 +91,13 @@ public class main {
 
                         System.out.print("Input value: ");
                         val = sc.nextLine();
+
                         try {
                             arr.add(prio, val);
                         } catch (NumberFormatException e) {
                             System.out.println("Please insert a proper key and value. " + e.getMessage());
                         }
+
                         break;
                     case 2:
                         System.out.println("Remove an entry");
@@ -92,15 +110,28 @@ public class main {
                     case 3:
                         System.out.print("Input count: ");
                         count = sc.nextInt();
+
                         try {
                             arr.heapSort(count);
                         } catch (NumberFormatException e) {
                             System.out.println("Please insert a proper key. " + e.getMessage());
                         }
+
                         break;
                     case 4:
                         System.out.println("Display all entries");
                         arr.display();
+
+                        break;
+                    case 5:
+                        System.out.println("Exporting heap as a file");
+                        sc.nextLine();
+
+                        System.out.print("Insert filename: ");
+                        String name = sc.nextLine();
+
+                        arr.export(name);
+                        
                         break;
                     case 0:
                         break;
@@ -120,7 +151,6 @@ public class main {
         
         }
     }
-
 
     public static void readFile(String pFilename, DSAHeap arr) {
         FileInputStream fileStream = null;
