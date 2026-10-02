@@ -34,7 +34,7 @@ public class DSAHeap{
         heap[count] = null;
 
         if(count > 0)
-            trickleDown(0);
+            trickleDown(0, count);
         
         return toRemove;
     }
@@ -73,12 +73,12 @@ public class DSAHeap{
     }
 
 
-    private void trickleDown(int idx) { // ITERATIVE
+    private void trickleDown(int idx, int c) { // ITERATIVE
         int leftCIdx = leftChild(idx);
         int rightCIdx = rightChild(idx);
         boolean keepGoing = true;
 
-        while(keepGoing && leftCIdx < count) {
+        while(keepGoing && leftCIdx < c) {
             keepGoing = false;
             int largeIdx = leftCIdx;
             
@@ -100,7 +100,7 @@ public class DSAHeap{
     private void heapify(int count) {
         int calc = (count / 2) - 1;
         for(int i = calc; i >= 0; i--){
-            trickleDown(i);
+            trickleDown(i, count);
         }
     }
 
@@ -108,7 +108,7 @@ public class DSAHeap{
         heapify(count);
         for(int i = count-1; i >= 0; i--){
             swap(heap, 0, i);
-            trickleDown(i);
+            trickleDown(0, i);
         }
     }
 }
