@@ -51,13 +51,14 @@ public class main {
             System.out.println(e + ". Please input size of heap properly.");
         }
 
-        System.out.println("Insert the file name: <filename.csv>");
-        filename = sc.nextLine();
+        sc.nextLine();
+        // System.out.println("Insert the file name: <filename.csv>");
+        // filename = sc.nextLine();
 
         DSAHeap heapArr = new DSAHeap(size);
-        readFile(filename, heapArr);
+        // readFile(filename, heapArr);
 
-        submenu(sc, heapArr, filename);
+        submenu(sc, heapArr, "manual");
     }
 
     public static void autoSelection2(Scanner sc) {
@@ -87,16 +88,20 @@ public class main {
                         System.out.println("Add an entry");
                         sc.nextLine(); // to clean up terminal
 
+                        
                         System.out.print("Input priority: ");
                         prio = sc.nextInt();    
 
+                        sc.nextLine();
                         System.out.print("Input value: ");
                         val = sc.nextLine();
 
                         try {
                             arr.add(prio, val);
-                        } catch (NumberFormatException e) {
+                        } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println("Please insert a proper key and value. " + e.getMessage());
+                        } catch(IllegalStateException e2) {
+                            System.err.println(e2);
                         }
 
                         break;
@@ -105,7 +110,12 @@ public class main {
                         System.out.print("This entry will be removed. ");
 
                         arr.displayTop();
-                        arr.remove();
+                        try {
+                            arr.remove();
+                        } catch (NullPointerException e) {
+                            System.out.println(e);
+                        }
+                        
                         
                         break;
                     case 3:
@@ -114,8 +124,10 @@ public class main {
 
                         try {
                             arr.heapSort(count);
-                        } catch (NumberFormatException e) {
+                        } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println("Please insert a proper key. " + e.getMessage());
+                        } catch (NullPointerException e2) {
+                            System.out.println(e2);
                         }
 
                         break;
